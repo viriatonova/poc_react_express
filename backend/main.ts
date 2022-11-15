@@ -1,10 +1,11 @@
+import 'reflect-metadata'
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const APP: Express = express();
-const PORT = process.env.PORT;
+const PORT = 52000;
 
 APP.get('/', (req: Request, res: Response) => {
   res.send('API running');
