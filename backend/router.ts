@@ -10,3 +10,15 @@ export const route: Router = Router()
 route.get('/api/v1', (req: Request, res: Response) => {
     res.send('API running');
   });
+
+/**
+ * 
+ * SingIn SingUp
+ */
+route.post('/api/v1/login', (req: Request, res: Response) => {
+  res.send('API running');
+});
+
+route.post('/api/v1/register', (req: Request, res: Response) => {
+  res.send('API running');
+});
