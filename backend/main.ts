@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { DataSource } from "typeorm"
 import express, { Express, Request, Response } from 'express';
-import { UserEntity } from './src/entitys/UserEntity';
+import { UserEntity } from './src/Entitys/UserEntity';
 import { MiddlewareGLobal } from './src/Middlewares/Default';
 import { route } from './router';
 import dotenv from 'dotenv';
