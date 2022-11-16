@@ -26,6 +26,7 @@ services:
 
     api:
         image: api_ng
+        container_name: api_ng
         build: ./backend
         command: bash -c "npm install && npm run build && npm start"
         volumes:

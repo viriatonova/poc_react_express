@@ -4,6 +4,7 @@ import express, { Express, Request, Response } from 'express';
 import { UserEntity } from './src/Entitys/UserEntity';
 import { MiddlewareGLobal } from './src/Middlewares/Default';
 import { route } from './router';
+import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -44,10 +45,11 @@ const routes = route
  * 
  * Configs
  */
+APP.use(bodyParser.json())
 APP.use(MiddlewareGLobal)
 APP.use(routes)
 
 
 APP.listen(PORT, () => {
-  console.log(`[server]: Server is running at https://localhost:${PORT}`);
+  console.log(`[server]: Server is running at https://0.0.0.0:${PORT}/api/v1`);
 });
