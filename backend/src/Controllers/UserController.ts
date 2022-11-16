@@ -24,11 +24,11 @@ export const Register = async (req: Request, res: Response ) => {
         return res.json({messsage: "User already exist"})
     } else {
         const account = await AppDataSource.getRepository(Account).create({ balance: 100 })
-        await AppDataSource.getRepository(Account).save(account)
+        const accountResult = await AppDataSource.getRepository(Account).save(account)
         const user = await AppDataSource.getRepository(User).create({
             username: req.body.username,
             password: req.body.password,
-            account: account
+            account: accountResult
         })
         const UserResult = await AppDataSource.getRepository(User).save(user)
         return res.send({user: UserResult})
