@@ -12,7 +12,7 @@ export class User {
     @Column()
     password!: string
 
-    @OneToOne(() => Account)
+    @OneToOne(() => Account, {cascade: true})
     @JoinColumn()
     account!: Account
 }

@@ -11,7 +11,11 @@ export const getUser = async (req: Request, res: Response ) => {
 }
 
 export const getUsers = async (req: Request, res: Response ) => {
-    const users = await AppDataSource.getRepository(User).find()
+    const users = await AppDataSource.getRepository(User).find({
+        relations: {
+            account: true
+        }
+    })
     res.json(users)
 }
 
@@ -28,7 +32,7 @@ export const Register = async (req: Request, res: Response ) => {
         const user = await AppDataSource.getRepository(User).create({
             username: req.body.username,
             password: req.body.password,
-            account: accountResult
+            account: account
         })
         const UserResult = await AppDataSource.getRepository(User).save(user)
         return res.send({user: UserResult})
