@@ -10,7 +10,7 @@ export class Transactions {
     createdAt!: string
 
     @Column()
-    value!: number
+    currency!: number
 
     @OneToOne(() => Account, {cascade: true})
     @JoinColumn()
