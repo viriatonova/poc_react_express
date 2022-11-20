@@ -9,6 +9,6 @@ route.get('/api/v1', (req: Request, res: Response) => res.send({status: 'API is 
 route.get('/api/v1/user', Auth, getUsers)
 route.get('/api/v1/user:username',Auth, getUser)
 route.post('/api/v1/register', Register);
-route.post('/api/v1/login', Auth, Login);
-route.get('/api/v1/transation:username', Auth, getUserTransaction);
-route.post('/api/v1/transation', Auth, registerTransaction);
+route.post('/api/v1/login', Login);
+route.get('/api/v1/transaction:username', Auth, getUserTransaction);
+route.post('/api/v1/transaction', Auth, registerTransaction);
