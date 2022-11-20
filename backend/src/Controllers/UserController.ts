@@ -1,7 +1,9 @@
+import bcrypt from "bcrypt";
 import { Request, Response } from 'express';
-import { AppDataSource } from "../../main"
+import { AppDataSource, SECRET } from "../../main"
 import { User } from "../Entities/User";
 import { Account } from '../Entities/Account';
+import { sign } from "jsonwebtoken";
 import { checkUsername, checkPassword, hashPassword } from '../helpers/UserHelper';
 
 export const getUser = async (req: Request, res: Response ) => {
@@ -17,7 +19,7 @@ export const getUsers = async (req: Request, res: Response ) => {
             account: true
         }
     })
-    res.json(users)
+    return res.send(users)
 }
 
 export const Register = async (req: Request, res: Response ) => {
@@ -26,8 +28,7 @@ export const Register = async (req: Request, res: Response ) => {
             username: req.body.username,
         })
         if (db_user) {
-            res.status(500)
-            return res.json({messsage: "User already exist"})
+            return res.status(500).send({messsage: "User already exist"})
         } else {
             const account = await AppDataSource.getRepository(Account).create({ balance: 100 })
             const accountResult = await AppDataSource.getRepository(Account).save(account)
@@ -40,11 +41,22 @@ export const Register = async (req: Request, res: Response ) => {
             return res.send({user: UserResult})
         }
     } else {
-        res.status(500)
-        return res.json({messsage: "Insuficient requirements from password"})
+        return res.status(500).send({messsage: "Insuficient requirements from password"})
     }
 }
 
 export const Login = async (req: Request, res: Response ) => {
-    res.send('ok')
+    const db_user = await AppDataSource.getRepository(User).findOneBy({
+        username: req.body.username,
+    })
+    if (!db_user) {
+        res.status(500)
+        return res.json({messsage: "User don't exist"})
+    }
+    if (bcrypt.compareSync(req.body.password, db_user.password)) {
+        const token = sign({ data: req.body }, SECRET, { expiresIn: '24h' })
+        return res.status(200).send({id: db_user.id, username: db_user.username, accessToken: token})
+    } else {
+        return res.status(500).send({messsage: "Password is not correct"})
+    }
 }
