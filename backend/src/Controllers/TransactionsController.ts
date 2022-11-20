@@ -8,6 +8,9 @@ import { getUserByName, getUserById, getAccountById } from '../helpers/DadaHelpe
 export const registerTransaction = async (req: Request, res: Response) => {
     const userDebit = await getUserByName(req.body.username)
     const userCredit = await getUserByName(req.body.userCredit)
+    if (userCredit?.username === userDebit?.username) {
+        return res.status(400).send({ message: "Can't transfer to self account" })
+    }
     if (userDebit!.account.balance < req.body.creditValue) {
         return res.status(400).send({ message: "Not monetary fund" })
     } else {
