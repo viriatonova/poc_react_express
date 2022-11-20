@@ -1,8 +1,9 @@
 import 'reflect-metadata'
 import { DataSource } from "typeorm"
 import express, { Express, Request, Response } from 'express';
-import { User} from './src/Entitys/User';
-import { Account } from './src/Entitys/Account';
+import { User} from './src/Entities/User';
+import { Account } from './src/Entities/Account';
+import { Transactions } from './src/Entities/Transactions';
 import { MiddlewareGLobal } from './src/Middlewares/Default';
 import { route } from './router';
 import bodyParser from 'body-parser';
@@ -21,7 +22,7 @@ dotenv.config();
   username: "postgres",
   password: "secret",
   database: "dev_ng",
-  entities: [User, Account],
+  entities: [User, Account, Transactions],
   synchronize: true,
   logging: false,
 })
