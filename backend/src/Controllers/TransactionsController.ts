@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
-import { User } from "../Entities/User";
 import { Account } from '../Entities/Account';
 import { Transactions } from "../Entities/Transactions";
 import { AppDataSource } from "../../main"
-import { getUserByName, getUserById, getAccountById } from '../helpers/DadaHelper';
-import { DeepPartial } from "typeorm"
+import { getUserByName, getAccountById } from '../helpers/DadaHelper';
 
 
 export const registerTransaction = async (req: Request, res: Response) => {
@@ -35,7 +33,7 @@ export const registerTransaction = async (req: Request, res: Response) => {
         const transaction = await AppDataSource.getRepository(Transactions).create({
             // @ts-ignore: Unreachable code error
             currency: req.body.creditValue,
-            debitedAcconunt: userDebit!.account.id,
+            debitedAccount: userDebit!.account.id,
             creditedAccount: userCredit!.account.id
         })
         const transactionResult = await AppDataSource.getRepository(Transactions).save(transaction)
@@ -45,5 +43,11 @@ export const registerTransaction = async (req: Request, res: Response) => {
 }
 
 export const getUserTransaction = async (req: Request, res: Response) => {
-
+    const db_user = await getUserByName(req.body.username)
+    const transactions = await AppDataSource.getRepository(Transactions).find({
+        // @ts-ignore: Unreachable code error
+        where: {debitedAccount: db_user?.id},
+        relations: ['debitedAccount'], 
+    })
+    return transactions
 }

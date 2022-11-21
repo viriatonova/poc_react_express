@@ -1,8 +1,5 @@
-import { Entity } from "typeorm"
-import { Request, Response } from 'express';
 import { User } from "../Entities/User";
 import { Account } from '../Entities/Account';
-import { Transactions } from "../Entities/Transactions";
 import { AppDataSource } from "../../main"
 
 export const getUserByName = async (username: string) => {

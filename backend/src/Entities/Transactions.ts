@@ -14,7 +14,7 @@ export class Transactions {
 
     @OneToOne(() => Account, {cascade: true})
     @JoinColumn()
-    debitedAcconunt!: Account
+    debitedAccount!: Account
 
     @OneToOne(() => Account, {cascade: true})
     @JoinColumn()

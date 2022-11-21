@@ -10,5 +10,5 @@ route.get('/api/v1/user', Auth, getUsers)
 route.get('/api/v1/user:username',Auth, getUser)
 route.post('/api/v1/register', Register);
 route.post('/api/v1/login', Login);
-route.get('/api/v1/transaction:username', Auth, getUserTransaction);
+route.get('/api/v1/transaction', Auth, getUserTransaction);
 route.post('/api/v1/transaction', Auth, registerTransaction);
