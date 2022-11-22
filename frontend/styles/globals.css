@@ -1,3 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    
+    body {
+        @apply w-screen h-full
+    }
+
+    #_next {
+        @apply w-screen h-full
+    }
+
+    h1 {
+        @apply font-semibold text-2xl tracking-wider
+        text-slate-700
+    }
+
+}
+
+@layer components {
+
+   /*
+   *
+   * DEFAULT
+   */
+
+    .input-text {
+        @apply w-full h-auto relative mb-6
+    }
+
+    .input-text input {
+        @apply w-full h-12 px-12 
+        border border-gray-200 rounded-md 
+        focus:outline-none focus:shadow-sm 
+        focus:ring-2 
+    }
+
+    .input-text label {
+        @apply absolute top-0 left-0 h-full p-3 
+    }
+
+    .input-email {
+        @apply w-full h-auto relative
+    }
+
+    .input-text label svg {
+        @apply fill-gray-800
+    }
+
+    .input-email input {
+        @apply w-full h-12 px-12 
+        border border-gray-200 rounded-md 
+        focus:outline-none focus:shadow-sm
+        focus:ring-2 
+    }
+
+    .input-email label {
+        @apply absolute top-0 left-0 h-full p-3 
+    }
+
+    .input-email label svg {
+        @apply text-gray-800
+    }
+
+    /*
+    *
+    * LOGIN PAGE
+    */
+    .login {
+        @apply w-full h-screen bg-slate-100
+        flex justify-center items-center
+    }
+
+    .login div {
+        @apply w-auto h-auto p-20 
+        flex flex-col justify-center items-center
+        bg-slate-300 rounded-md drop-shadow-lg
+    }
+}

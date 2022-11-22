@@ -1,9 +1,14 @@
+import FormLogin from "../components/FormLogin"
+
 const Home = () => {
-  return (
-    <div className="bg-purple-400">
-      <p>Hello World</p>
-    </div>
-  )
+    return (
+        <main className="login">
+            <div>
+                <h1 className="mb-6">NG.Cash Internal Exchange</h1>
+                <FormLogin />
+            </div>
+        </main>
+    )
 }
 
 export default Home
