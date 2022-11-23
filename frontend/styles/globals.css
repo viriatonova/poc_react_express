@@ -14,7 +14,7 @@
 
     h1 {
         @apply font-semibold text-2xl tracking-wider
-        text-slate-700
+        text-slate-300
     }
 
 }
@@ -26,8 +26,16 @@
    * DEFAULT
    */
 
+   .btn-primary {
+        @apply w-full h-12 px-4 py-2 text-base lg:text-xl rounded-md
+        bg-slate-400  border-l-slate-700
+        hover:border-none hover:bg-slate-100
+        active:bg-green-500
+        transition ease-in-out duration-300 uppercase
+    }
+
     .input-text {
-        @apply w-full h-auto relative mb-6
+        @apply w-full h-auto relative mb-12
     }
 
     .input-text input {
@@ -69,13 +77,18 @@
     * LOGIN PAGE
     */
     .login {
-        @apply w-full h-screen bg-slate-100
+        @apply w-full h-screen bg-slate-300
         flex justify-center items-center
     }
 
-    .login div {
-        @apply w-auto h-auto p-20 
-        flex flex-col justify-center items-center
-        bg-slate-300 rounded-md drop-shadow-lg
+    .login section {
+        @apply w-auto h-auto p-32 
+        flex flex-col justify-start items-center
+        bg-slate-700 rounded-md drop-shadow-2xl
+    }
+
+    .login-title {
+        @apply w-full h-full mb-12
+        
     }
 }
