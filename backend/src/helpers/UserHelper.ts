@@ -1,12 +1,16 @@
 import bcrypt from "bcrypt";
 
+export type checkUsernameFn = (username: string) => boolean
+export type checkPasswordFn = (password: string) => boolean
+
 /**
  * 
  * @param username 
  * @returns 
  */
-export const checkUsername = (username: string) => {
-    return username.length < 3 ? false : true
+export const checkUsername: checkUsernameFn = (username) => {
+    const check = username.length < 3 ? false : true
+    return check
 }
 
 /**
@@ -14,7 +18,7 @@ export const checkUsername = (username: string) => {
  * @param password 
  * @returns 
  */
-export const checkPassword = (password: string) => {
+export const checkPassword: checkPasswordFn = (password: string) => {
     const checkLength = password.length < 8 ? false : true
     const re = /[A-Z\d]/
     const caracters = re.test(password)

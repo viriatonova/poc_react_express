@@ -4,7 +4,7 @@ import { AppDataSource, SECRET } from "../../main"
 import { User } from "../Entities/User";
 import { Account } from '../Entities/Account';
 import { sign } from "jsonwebtoken";
-import { checkUsername, checkPassword, hashPassword } from '../helpers/UserHelper';
+import { checkUsername, checkPassword, hashPassword,} from '../helpers/UserHelper';
 
 export const getUser = async (req: Request, res: Response ) => {
     const results = await AppDataSource.getRepository(User).findOneBy({
@@ -23,7 +23,9 @@ export const getUsers = async (req: Request, res: Response ) => {
 }
 
 export const Register = async (req: Request, res: Response ) => {
-    if (checkUsername(req.body.username) && checkPassword(req.body.password)) {
+    const Username = checkUsername(req.body.username)
+    const Password = checkPassword(req.body.password)
+    if ( Username && Password ) {
         const db_user = await AppDataSource.getRepository(User).findOneBy({
             username: req.body.username,
         })

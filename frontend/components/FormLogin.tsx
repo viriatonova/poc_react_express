@@ -1,33 +1,22 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useRouter } from 'next/router';
-import FetchNg from "../helpers/Fetch";
-interface IFormInputs {
+import { apiRegister} from "../service/api";
+
+export type IFormInputs = {
     username: string
     password: string
 }
 
 const FormLogin = () => {
     const router = useRouter();
-    const { register, formState: { errors }, handleSubmit, } = useForm<IFormInputs>();
+    const { register, formState: { errors }, handleSubmit } = useForm<IFormInputs>();
 
-    const onSubmit = async (data: IFormInputs) => {
+    const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
         data.username = data?.username.replace(/\s/g, '').trim()
         if (router.asPath === '/singup') {
-            console.log(data)
-            const responseApi = await FetchNg(
-                {
-                    url: 'http://0.0.0.0:52000/api/v1/register',
-                    method: 'POST',
-                    token: '',
-                    body: {
-                        "username": data.username,
-                        "password": data.password
-                    }
-                }
-            )
-            console.log(responseApi)
-            if (responseApi?.token) router.push('/')
+            const responseApi = await apiRegister(data)
+            if (responseApi?.user.id) router.push('/')
         } else {
             router.push('dashboard')
         }
