@@ -39,12 +39,14 @@ services:
             db:
                 condition: service_healthy
 
-    # front:
-    #     build: ./frontend
-    #     command: npm start
-    #     ports:
-    #         - "3000:3000"
-    #     volumes:
-    #         - ./front:/code/frontend
-    #     depends_on:
-    #         - api
+    front:
+        image: front_ng
+        container_name: front_ng
+        build: ./frontend
+        command: bash -c "npm install && npm run dev"
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./frontend:/code/
+        depends_on:
+            - api

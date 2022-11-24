@@ -6,6 +6,7 @@ import { Account } from './src/Entities/Account';
 import { Transactions } from './src/Entities/Transactions';
 import { MiddlewareGLobal } from './src/Middlewares/Default';
 import { route } from './router';
+import cors from 'cors'
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 
@@ -52,10 +53,10 @@ const routes = route
  * 
  * Configs
  */
+APP.use(cors())
 APP.use(bodyParser.json())
 APP.use(MiddlewareGLobal)
 APP.use(routes)
-
 
 APP.listen(PORT, () => {
     console.log(`[server]: Server is running at https://0.0.0.0:${PORT}/api/v1`);

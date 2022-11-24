@@ -1,9 +1,17 @@
-const SingUP = () => {
+import FormLogin from "../components/FormLogin"
+import Link from "next/link"
+
+const SingUp = () => {
     return (
-        <main>
-            <p>SingUP</p>
+        <main className="login">
+            <section>
+                <h1 className="login-title text-center tracking-wide text-3xl">
+                    Register
+                </h1>
+                <FormLogin />
+            </section>
         </main>
-    );
+    )
 }
- 
-export default SingUP;
+
+export default SingUp

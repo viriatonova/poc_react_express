@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useRouter } from 'next/router';
-
+import FetchNg from "../helpers/Fetch";
 interface IFormInputs {
     username: string
     password: string
@@ -9,12 +9,28 @@ interface IFormInputs {
 
 const FormLogin = () => {
     const router = useRouter();
-    const {register, formState: { errors }, handleSubmit,} = useForm<IFormInputs>();
-    const onSubmit = (data: IFormInputs) => {
+    const { register, formState: { errors }, handleSubmit, } = useForm<IFormInputs>();
+
+    const onSubmit = async (data: IFormInputs) => {
         data.username = data?.username.replace(/\s/g, '').trim()
-        router.push('dashboard')
-        console.log(data)
-        return data
+        if (router.asPath === '/singup') {
+            console.log(data)
+            const responseApi = await FetchNg(
+                {
+                    url: 'http://0.0.0.0:52000/api/v1/register',
+                    method: 'POST',
+                    token: '',
+                    body: {
+                        "username": data.username,
+                        "password": data.password
+                    }
+                }
+            )
+            console.log(responseApi)
+            if (responseApi?.token) router.push('/')
+        } else {
+            router.push('dashboard')
+        }
     };
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="" action="POST">
