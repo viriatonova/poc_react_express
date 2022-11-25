@@ -5,7 +5,7 @@ const Home = () => {
     return (
         <main className="login">
             <section>
-                <h1 className="login-title">
+                <h1 className="mb-12">
                     <span className="text-green-500 font-bold mr-4 text-3xl">NG.Cash</span> 
                     Internal Exchange
                 </h1>

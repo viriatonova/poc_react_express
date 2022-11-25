@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useRouter } from 'next/router';
-import { apiRegister} from "../service/api";
+import { apiRegister, apiLogin} from "../service/apiRequests";
 
 export type IFormInputs = {
     username: string
@@ -15,10 +15,11 @@ const FormLogin = () => {
     const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
         data.username = data?.username.replace(/\s/g, '').trim()
         if (router.asPath === '/singup') {
-            const responseApi = await apiRegister(data)
-            if (responseApi?.user.id) router.push('/')
+            const userRegister = await apiRegister(data)
+            if (userRegister?.user.id) router.push('/')
         } else {
-            router.push('dashboard')
+            const userLogin = await apiLogin(data)
+            if (userLogin?.accessToken) router.push('dashboard')
         }
     };
     return (
@@ -63,7 +64,9 @@ const FormLogin = () => {
                     render={({ message }) => <p className="mt-1 text-red-400 tracking-wide">{message}</p>}
                 />
             </fieldset>
-            <button className="btn-primary" type="submit">Entrar</button>
+            <button className="btn-primary" type="submit">
+                { router.asPath === '/singup' ? "Sing up" : "Sing in"}
+            </button>
         </form>
     )
 }
