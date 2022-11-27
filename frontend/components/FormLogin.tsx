@@ -2,6 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useRouter } from 'next/router';
 import { apiRegister, apiLogin} from "../service/apiRequests";
+import { signIn } from 'next-auth/react';
 
 export type IFormInputs = {
     username: string
@@ -18,8 +19,13 @@ const FormLogin = () => {
             const userRegister = await apiRegister(data)
             if (userRegister?.user.id) router.push('/')
         } else {
-            const userLogin = await apiLogin(data)
-            if (userLogin?.accessToken) router.push('dashboard')
+            const response = await signIn('credentials', {
+                username: data.username,
+                password: data.password,
+                redirect: false
+            })
+            console.log(`=========== ${JSON.stringify(response)} ==========`)
+            if (response?.ok) router.push('dashboard')
         }
     };
     return (
