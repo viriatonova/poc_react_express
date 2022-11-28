@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useRouter } from 'next/router';
-import { apiRegister, apiLogin} from "../service/apiRequests";
+import { apiRegister} from "../service/apiRequests";
 import { signIn } from 'next-auth/react';
+import ErrorMsg from "./ErrorMsg";
+
 
 export type IFormInputs = {
     username: string
@@ -10,6 +13,7 @@ export type IFormInputs = {
 }
 
 const FormLogin = () => {
+    const [error, setError] = useState('');
     const router = useRouter();
     const { register, formState: { errors }, handleSubmit } = useForm<IFormInputs>();
 
@@ -24,7 +28,11 @@ const FormLogin = () => {
                 password: data.password,
                 redirect: false
             })
-            if (response?.ok) router.push('dashboard')
+            if (response?.ok) {
+                router.push('dashboard')
+            } else {
+                setError("Wrong user or password")
+            }  
         }
     };
     return (
@@ -72,6 +80,7 @@ const FormLogin = () => {
             <button className="btn-primary" type="submit">
                 { router.asPath === '/singup' ? "Sing up" : "Sing in"}
             </button>
+            <ErrorMsg error={error}/>
         </form>
     )
 }

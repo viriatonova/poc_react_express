@@ -27,6 +27,11 @@
    * DEFAULT
    */
 
+    .error-msg {
+        @apply w-full h-auto py-6
+        text-red-500 font-medium tracking-wide text-center
+    }
+
    .btn-primary {
         @apply w-full h-12 px-4 py-2 text-base lg:text-xl rounded-xl
         bg-slate-400  border-l-slate-700
@@ -94,7 +99,7 @@
     */
 
     .dash {
-        @apply w-full h-screen p-6 
+        @apply w-full h-screen p-40 
         flex flex-col justify-center items-center
         bg-slate-900
     }
