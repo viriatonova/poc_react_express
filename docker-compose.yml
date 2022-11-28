@@ -50,3 +50,5 @@ services:
             - ./frontend:/code/
         depends_on:
             - api
+        external_links: 
+            - "api:api.teste.com"

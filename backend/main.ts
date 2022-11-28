@@ -34,29 +34,25 @@ AppDataSource.initialize()
     })
     .catch((error) => console.log(error))
 
-/**
- * 
- * Configs
- */
-export const SECRET = String(process.env.SECRET)
-
+    
 /**
  * 
  * Server
  */
+export const SECRET = 'asdkjahsçldkhasduahuh'
 const APP: Express = express();
 const PORT = 52000;
-const routes = route
+const ROUTER = route
 
 
 /**
  * 
  * Configs
  */
-APP.use(cors())
+APP.use(cors<Request>())
 APP.use(bodyParser.json())
 APP.use(MiddlewareGLobal)
-APP.use(routes)
+APP.use(ROUTER)
 
 APP.listen(PORT, () => {
     console.log(`[server]: Server is running at https://0.0.0.0:${PORT}/api/v1`);

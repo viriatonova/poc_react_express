@@ -16,24 +16,6 @@ export const apiRegister = async (data: IFormInputs ) => {
     }
 }
 
-export const apiLogin = async (data: IFormInputs ) => {
-    try {
-        console.log(data)
-        const url = 'http://0.0.0.0:52000/api/v1/login';
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-        return response.json()
-    } catch (err) {
-        console.log(data)
-        console.log(err)
-    }
-}
-
 // export const apiTransaction = async (data: IFormCash ) => {
 //     try {
 //         const url = 'http://0.0.0.0:52000/api/v1/transaction';

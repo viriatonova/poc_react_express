@@ -24,7 +24,6 @@ const FormLogin = () => {
                 password: data.password,
                 redirect: false
             })
-            console.log(`=========== ${JSON.stringify(response)} ==========`)
             if (response?.ok) router.push('dashboard')
         }
     };
