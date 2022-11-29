@@ -7,15 +7,9 @@ export default NextAuth({
         signIn: '/'
     },
     session: {
+        // strategy: "jwt",
         maxAge: 1 * 24 * 60 * 60
     },
-    // callbacks: {
-    //     async session({ session, token, user }) {
-    //     // @ts-ignore: Unreachable code error
-    //       session.user = token.id
-    //       return session
-    //     }
-    // },
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -40,10 +34,10 @@ export default NextAuth({
                     }
                 }
                 const response = await apiLogin();
-                console.log(JSON.stringify(response));
+
                 const user = {
-                    token: response
-                }
+                    name: response
+                } 
                 if (user) {
                     return user
                 } else {
@@ -52,14 +46,5 @@ export default NextAuth({
             }
         })
     ],
-    callbacks: {
-        async session({ token, session }) {
-        // @ts-ignore: Unreachable code error
-          return token;
-        },
-        async jwt({ token, user }) {
-        // @ts-ignore: Unreachable code error
-          return token;
-        },
-    },
+
 })

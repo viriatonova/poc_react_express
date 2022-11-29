@@ -16,7 +16,7 @@ const Dashboard = () => {
         <main className="dash">
             <div className="dash-wrapper">
                 <header className="dash-header">
-                    <span className="w-full h-auto text-left mb text-2xl">Olá, {session && JSON.stringify(session, null, 4)}</span>
+                    <span className="w-full h-auto text-left mb text-2xl">Olá, {session && JSON.stringify(session?.user.name.id, null, 4)}</span>
                     <span className="w-1/3 h-auto text-right">{date}</span>
                     <button 
                         className="w-1/5 btn-primary" 
@@ -32,7 +32,7 @@ const Dashboard = () => {
                         <Cashout />
                     </article>
                     <article className="w-full user-clip">
-                        <Transfers transactions={[]}/>
+                        <Transfers />
                     </article>
                 </section>
             </div>

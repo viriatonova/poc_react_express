@@ -41,7 +41,7 @@ export const registerTransaction = async (req: Request, res: Response) => {
                 creditedAccount: userCredit!.account.id
             })
             const transactionResult = await AppDataSource.getRepository(Transactions).save(transaction)
-    
+            
             return res.status(200).send({ transaction: transactionResult })
         } catch (err) {
             console.log(err)
@@ -50,11 +50,12 @@ export const registerTransaction = async (req: Request, res: Response) => {
 }
 
 export const getUserTransaction = async (req: Request, res: Response) => {
-    const db_user = await getUserByName(req.body.username)
+    // @ts-ignore: Unreachable code error
+    const db_user = await getUserByName(req.query.username)
     const transactions = await AppDataSource.getRepository(Transactions).find({
         // @ts-ignore: Unreachable code error
         where: {debitedAccount: db_user?.id},
         relations: ['debitedAccount'], 
     })
-    return transactions
+    return res.status(200).send(transactions)
 }

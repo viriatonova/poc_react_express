@@ -1,6 +1,7 @@
-import { useContext } from "react";
-// import { TransfersContext } from "../../context/TransferContext";
+import { useState, useEffect, useCallback } from "react";
+import { useSession } from "next-auth/react"
 import TransfersCard from "./TransfersCard";
+import { apiTransaction } from "../../service/apiRequests";
 
 export type ICard = {
     id?: number;
@@ -15,8 +16,24 @@ export type ICardItems = {
 }
 
 
-const Transfers = ({transactions}: ICardItems) => {
-    // const { state } = useContext(TransfersContext)
+const Transfers = () => {
+    const { data: session, status } = useSession();
+    const [transactions, setTranssactions] = useState([])
+
+    const handleTransactions = useCallback( async () => {
+        const db_transactions = await apiTransaction({
+            username: session?.user?.name.username,
+            token: session?.user?.name.accessToken
+        })
+        return db_transactions
+    }, [session])
+
+    useEffect(()=>{
+        handleTransactions().then((data) => {
+            setTranssactions(data)
+        })
+    },[handleTransactions])
+
     return (
         <div className="transfers">
             <input className="search-transfer" type="text" />
