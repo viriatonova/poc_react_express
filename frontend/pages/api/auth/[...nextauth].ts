@@ -40,12 +40,11 @@ export default NextAuth({
                     }
                 }
                 const response = await apiLogin();
+                console.log(JSON.stringify(response));
                 const user = {
-                    _id: response.id,
-                    name: response.username,
-                    apiToken: response.accessToken
+                    token: response
                 }
-                if (user._id) {
+                if (user) {
                     return user
                 } else {
                     return null
@@ -53,11 +52,14 @@ export default NextAuth({
             }
         })
     ],
-    // callbacks: {
-    //     async session({ session, token }) {
-    //     // @ts-ignore: Unreachable code error
-    //       session.user = session.name;
-    //       return session;
-    //     }
-    // },
+    callbacks: {
+        async session({ token, session }) {
+        // @ts-ignore: Unreachable code error
+          return token;
+        },
+        async jwt({ token, user }) {
+        // @ts-ignore: Unreachable code error
+          return token;
+        },
+    },
 })
