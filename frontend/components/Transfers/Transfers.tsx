@@ -60,8 +60,8 @@ const Transfers = () => {
                     transactions?.map((transaction: Fake) => (
                         <TransfersCard 
                             key={transaction.id}
-                            currency={transaction.name}
-                            credited={transaction.year}
+                            credited={transaction.name}
+                            currency={transaction.year}
                             date={transaction.pantone_value}
                         />
                     ))
