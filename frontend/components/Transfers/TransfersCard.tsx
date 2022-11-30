@@ -1,12 +1,12 @@
 import { ICard } from "./Transfers";
 
-const TransfersCard = ({name, currency, date}: ICard) => {
+const TransfersCard = ({currency, date, credited}: ICard) => {
     return (
-        <li className="transfers-card">
-            <ul>{name}</ul>
-            <ul>{currency}</ul>
-            <ul>{date}</ul>
-        </li>
+        <ul className="transfers-card">
+            <li>{currency}</li>
+            <li>{date}</li>
+            <li>{credited}</li>
+        </ul>
     );
 }
  

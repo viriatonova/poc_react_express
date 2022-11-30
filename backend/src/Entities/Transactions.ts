@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
 import { Account } from "./Account"
 
 @Entity()
@@ -12,11 +12,9 @@ export class Transactions {
     @Column()
     currency!: number
 
-    @OneToOne(() => Account, {cascade: true})
-    @JoinColumn()
-    debitedAccount!: Account
+    @ManyToOne(() => Account, (account) => account.debitedTransactions)
+    debitedAccount!: Account[]
 
-    @OneToOne(() => Account, {cascade: true})
-    @JoinColumn()
-    creditedAccount!: Account
+    @ManyToOne(() => Account, (account) => account.creditedTransactions)
+    creditedAccount!: Account[]
 }

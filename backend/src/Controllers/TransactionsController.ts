@@ -40,6 +40,7 @@ export const registerTransaction = async (req: Request, res: Response) => {
                 debitedAccount: userDebit!.account.id,
                 creditedAccount: userCredit!.account.id
             })
+            
             const transactionResult = await AppDataSource.getRepository(Transactions).save(transaction)
             
             return res.status(200).send({ transaction: transactionResult })

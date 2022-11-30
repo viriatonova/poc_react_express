@@ -193,8 +193,17 @@
     }
 
     .transfers-card {
-        @apply  w-full h-full
+        @apply w-full h-full space-x-2
         flex justify-start items-center
-        border border-slate-700 rounded-xl
+    }
+
+    .transfers-card li {
+        @apply w-full h-full
+        
+    }
+
+    .transfers-card {
+        @apply w-full h-full
+        flex justify-start items-center
     }
 }
