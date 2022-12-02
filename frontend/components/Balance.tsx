@@ -1,8 +1,11 @@
-const Balance = () => {
+type CurrencyProp = {
+    currency: number | any
+}
+const Balance = ({currency}:CurrencyProp) => {
     return (
         <div className="balance">
             <p>Account Balance</p>
-            <h2 className="text-4xl font-bold text-green-700">$ 100000000</h2>
+            <h2 className="text-4xl font-bold text-green-700">{`R$ ${currency}`}</h2>
         </div>
     );
 }

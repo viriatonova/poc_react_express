@@ -51,7 +51,6 @@ const Transfers = () => {
         })
     },[handleJSON])
 
-    console.log(transactions)
     return (
         <div className="transfers">
             <input className="search-transfer" type="text" />

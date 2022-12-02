@@ -115,6 +115,17 @@
         flex justify-center items-center
     }
 
+    .dash-user {
+        @apply w-full h-auto 
+        flex items-end
+        text-left text-2xl 
+    }
+
+    .dash-user h2 {
+        @apply ml-6 tracking-wider
+        text-green-500 capitalize text-3xl font-bold
+    }
+
     .dash-transaction {
         @apply w-full h-full p-6 space-x-6
         flex justify-start items-start

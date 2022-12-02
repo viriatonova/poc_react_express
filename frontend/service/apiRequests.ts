@@ -36,3 +36,19 @@ export const apiTransaction = async ({username, token}: IFormCash) => {
         console.log(err)
     }
 }
+
+export const apiUser = async ({username, token}: IFormCash) => {
+    try {
+        const url = `http://0.0.0.0:52000/api/v1/user?username=${username}`;
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
+        return response.json()
+    } catch (err) {
+        console.log(err)
+    }
+}

@@ -4,11 +4,16 @@ import { AppDataSource, SECRET } from "../../main"
 import { User } from "../Entities/User";
 import { Account } from '../Entities/Account';
 import { sign } from "jsonwebtoken";
-import { checkUsername, checkPassword, hashPassword,} from '../helpers/UserHelper';
+import { checkUsername, checkPassword, hashPassword} from '../helpers/UserHelper';
+import { getUserByName } from '../helpers/DadaHelper';
 
 export const getUser = async (req: Request, res: Response ) => {
-    const results = await AppDataSource.getRepository(User).findOneBy({
-        username: req.params.username,
+    // @ts-ignore: Unreachable code error
+    const db_user = await getUserByName(req.query.username)
+    const results = await AppDataSource.getRepository(User).find({
+        // @ts-ignore: Unreachable code error
+        where: {username: db_user?.username},
+        relations: ['account'],
     })
     return res.send(results)
 }
