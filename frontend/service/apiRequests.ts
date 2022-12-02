@@ -21,7 +21,7 @@ export const apiRegister = async (data: IFormInputs ) => {
     }
 }
 
-export const apiTransaction = async ({username, token}: IFormCash) => {
+export const apiGetTransactions = async ({username, token}: IFormCash) => {
     try {
         const url = `http://0.0.0.0:52000/api/v1/transaction?username=${username}`;
         const response = await fetch(url, {
@@ -42,6 +42,22 @@ export const apiUser = async ({username, token}: IFormCash) => {
         const url = `http://0.0.0.0:52000/api/v1/user?username=${username}`;
         const response = await fetch(url, {
             method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
+        return response.json()
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+export const apiTransaction = async ({username, token}: IFormCash) => {
+    try {
+        const url = `http://0.0.0.0:52000/api/v1/trasaction`;
+        const response = await fetch(url, {
+            method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',

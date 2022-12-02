@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react"
 import TransfersCard from "./TransfersCard";
-import { apiTransaction } from "../../service/apiRequests";
+import { apiGetTransactions } from "../../service/apiRequests";
 
 export type ICard = {
     id?: number;
@@ -38,7 +38,7 @@ const Transfers = () => {
     }, [])
 
     const handleTransactions = useCallback( async () => {
-        const db_transactions = await apiTransaction({
+        const db_transactions = await apiGetTransactions({
             username: session?.user?.name.username,
             token: session?.user?.name.accessToken
         })
